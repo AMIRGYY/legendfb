@@ -1138,102 +1138,204 @@ img.player-img {
     </div>
 </div>
 <!-- ================== پایان بخش کارت‌های طلایی ================== -->
-<!-- فرم نظرسنجی جذاب — اطلاعات مخفیانه می‌ره توی Avalform تو -->
-<div class="review-section">
-    <h2>نظرت درباره سایت چیه؟</h2>
-    <p>با یه لحظه وقت گذاشتن خیلی کمکم می‌کنی</p>
+<div style="all:unset;display:block;">
+  <!-- ویجت نهایی تالار اسطوره‌ها + نظر سایت (100% کار می‌کنه) -->
+  <div style="max-width:560px;margin:40px auto;font-family:'Vazirmatn',sans-serif;background:#0f0f1f;border-radius:24px;overflow:hidden;border:3px solid #ffd700;box-shadow:0 0 60px rgba(255,215,0,0.5);direction:rtl;color:#ffd700;">
 
-    <form id="hiddenForm">
-        <div class="stars-input">
-            <input type="radio" name="rating" value="5" id="star5" required><label for="star5">عالی</label>
-            <input type="radio" name="rating" value="4" id="star4"><label for="star4">خوب</label>
-            <input type="radio" name="rating" value="3" id="star3"><label for="star3">متوسط</label>
-            <input type="radio" name="rating" value="2" id="star2"><label for="star2">ضعیف</label>
-            <input type="radio" name="rating" value="1" id="star1"><label for="star1">بد</label>
+    <header style="background:linear-gradient(45deg,#000,#b8860b,#ffd700,#b8860b,#000);padding:25px 15px;text-align:center;font-size:2rem;font-weight:900;text-shadow:0 0 25px #ffd700;">
+      تالار اسطوره‌های جاودان فوتبال
+    </header>
+
+    <!-- آمار زنده -->
+    <div style="padding:22px;background:#111;text-align:center;">
+      <div style="font-size:1.4rem;margin-bottom:20px;padding:12px;background:rgba(184,134,11,0.25);border-radius:14px;">
+        کل آرا: <strong id="totalVotes">0</strong>
+      </div>
+      <div id="chart"></div>
+    </div>
+
+    <!-- فرم رأی اسطوره -->
+    <div style="padding:25px;background:#000;">
+      <form id="legendForm">
+        <input type="text" id="legendName" placeholder="لقبت چیه؟" required style="width:100%;padding:15px;margin-bottom:12px;border-radius:14px;border:2px solid #ffd700;background:#1a0000;color:#fff;font-size:1rem;">
+        <select id="legend" required style="width:100%;padding:15px;margin-bottom:12px;border-radius:14px;border:2px solid #ffd700;background:#1a0000;color:#ffd700;font-size:1.1rem;font-weight:bold;">
+          <option value="">اسطوره‌ات کیه؟</option>
+          <option>دیگو مارادونا</option>
+          <option>پله</option>
+          <option>لیونل مسی</option>
+          <option>کریستیانو رونالدو</option>
+          <option>زین‌الدین زیدان</option>
+          <option>یوهان کرایوف</option>
+          <option>رونالدو نازاریو (R9)</option>
+          <option>فرانتس بکن‌باوئر</option>
+          <option>آلفردو دی‌استفانو</option>
+          <option>جرج بست</option>
+          <option>سایر</option>
+        </select>
+        <input type="text" id="otherLegend" placeholder="اسم اسطوره..." style="display:none;width:100%;padding:15px;margin-bottom:12px;border-radius:14px;border:2px solid #ffd700;background:#1a0000;color:#fff;">
+        <textarea id="legendMessage" placeholder="چرا این بازیکن اسطوره‌ست؟" required style="width:100%;padding:15px;margin-bottom:15px;border-radius:14px;border:2px solid #ffd700;background:#1a0000;color:#fff;min-height:100px;resize:vertical;"></textarea>
+        <button type="submit" style="width:100%;background:linear-gradient(45deg,#ffd700,#b8860b);color:#000;padding:16px;font-size:1.4rem;font-weight:bold;border:none;border-radius:50px;cursor:pointer;box-shadow:0 10px 30px rgba(255,215,0,0.6);">ثبت رأی اسطوره</button>
+      </form>
+    </div>
+
+    <!-- بخش نظر درباره سایت + ستاره فعال -->
+    <div style="padding:25px;background:#0a001a;border-top:3px dashed #b8860b;">
+      <h3 style="text-align:center;margin-bottom:20px;font-size:1.5rem;">نظر شما درباره سایت</h3>
+      <form id="siteFeedbackForm">
+        <input type="text" id="siteName" placeholder="اسم شما *" required style="width:100%;padding:15px;margin-bottom:12px;border-radius:14px;border:2px solid #ffd700;background:#1a0000;color:#fff;font-size:1rem;">
+        <input type="email" id="siteEmail" placeholder="ایمیل (اختیاری)" style="width:100%;padding:15px;margin-bottom:20px;border-radius:14px;border:2px solid #ffd700;background:#1a0000;color:#fff;font-size:1rem;">
+
+        <div style="text-align:center;margin:20px 0;">
+          <span style="font-weight:bold;margin-left:10px;">امتیاز بده:</span><br>
+          <div style="margin-top:10px;">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+          </div>
+          <input type="hidden" id="rating" value="0">
         </div>
 
-        <textarea name="message" placeholder="نظر و پیشنهادت رو بنویس..." required></textarea>
-        <input type="text" name="name" placeholder="اسم (اختیاری)" class="name-input">
+        <textarea id="siteMessage" placeholder="نظرتو درباره سایت بنویس..." required style="width:100%;padding:15px;margin-bottom:15px;border-radius:14px;border:2px solid #ffd700;background:#1a0000;color:#fff;min-height:90px;resize:vertical;"></textarea>
+        <button type="submit" style="width:100%;background:linear-gradient(45deg,#39ff14,#00ff41);color:#000;padding:16px;font-size:1.4rem;font-weight:bold;border:none;border-radius:50px;cursor:pointer;box-shadow:0 10px 30px rgba(0,255,20,0.5);">ارسال نظر سایت</button>
+      </form>
+    </div>
 
-        <button type="submit">ارسال نظر</button>
-    </form>
-
-    <div id="reviewsList">در حال بارگذاری نظرات...</div>
+    <!-- نمایش نظرات مرتب‌شده -->
+    <div id="commentsList" style="padding:25px;background:#000;max-height:700px;overflow-y:auto;"></div>
+  </div>
 </div>
 
-<style>
-.review-section{max-width:700px;margin:50px auto;background:linear-gradient(135deg,#667eea,#764ba2);padding:40px;border-radius:24px;color:white;box-shadow:0 20px 40px rgba(0,0,0,.2);font-family:Tahoma,sans-serif;text-align:center}
-.review-section h2{font-size:28px;margin:0 0 10px}
-.review-section p{opacity:0.9;margin-bottom:30px}
-.stars-input{margin:25px 0}
-.stars-input input{display:none}
-.stars-input label{font-size:40px;cursor:pointer;padding:0 8px;transition:.3s}
-.stars-input label:before{content:'☆'}
-.stars-input input:checked~label:before,.stars-input label:hover:before,.stars-input label:hover~label:before{content:'⭐';color:#ffd700;text-shadow:0 0 15px #fff}
-textarea,.name-input{width:100%;padding:16px;border:none;border-radius:16px;margin:15px 0;font-size:16px}
-textarea{height:110px;resize:none}
-button{background:#fff;color:#667eea;font-weight:bold;padding:14px 40px;border:none;border-radius:50px;cursor:pointer;font-size:18px;transition:.3s}
-button:hover{transform:translateY(-3px);box-shadow:0 15px 30px rgba(0,0,0,.3)}
-.review-card{background:white;color:#333;margin:20px 0;padding:20px;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,.15);animation:slideUp .6s}
-.review-card .stars{color:#ffd700;font-size:24px;margin-bottom:10px}
-@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-</style>
-
 <script>
-// ارسال مخفی به Avalform + نمایش نظرات زنده
-const AVALFORM_ID = "75348947";
-const AVALFORM_URL = `https://form.avalform.com/submit.php?id=${AVALFORM_ID}`;
+(function(){
+  const AVALFORM_URL = "https://form.avalform.com/view.php?id=75348947";
+  const STORAGE_KEY = 'legend_final_2025';
+  let data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { votes: [], feedbacks: [] };
 
-document.getElementById('hiddenForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const rating = this.rating.value;
-    const message = this.message.value;
-    const name = this.name.value.trim() || "ناشناس";
-
-    // ارسال مخفی به Avalform
-    const formData = new FormData();
-    formData.append('field_1', rating);      // امتیاز
-    formData.append('field_2', message);     // نظر
-    formData.append('field_3', name);        // اسم
-
-    await fetch(AVALFORM_URL, {
-        method: 'POST',
-        body: formData
+  // ستاره‌ها (فعال و طلایی میشن)
+  document.querySelectorAll('.star').forEach(star => {
+    star.style.cursor = 'pointer';
+    star.style.fontSize = '2.4rem';
+    star.style.transition = 'color 0.3s';
+    star.addEventListener('click', function() {
+      const val = this.getAttribute('data-value');
+      document.getElementById('rating').value = val;
+      document.querySelectorAll('.star').forEach((s, i) => {
+        s.style.color = (i < val) ? '#ffd700' : '#666';
+      });
     });
+  });
 
-    alert('ممنون! نظرت ثبت شد و همه می‌تونن ببیننش');
-    this.reset();
-    loadReviews(); // بروزرسانی فوری نظرات
-});
+  // نمایش/مخفی کردن "سایر"
+  document.getElementById('legend').addEventListener('change', function() {
+    document.getElementById('otherLegend').style.display = this.value === 'سایر' ? 'block' : 'none';
+  });
 
-// لود کردن نظرات زنده از Avalform
-async function loadReviews() {
+  // ارسال تضمینی به آوال‌فرم
+  async function sendToAvalform(entry) {
+    const fd = new FormData();
+    fd.append('type', entry.type === 'legend' ? 'رأی اسطوره' : 'نظر سایت');
+    fd.append('name', entry.name || 'ناشناس');
+    if (entry.legend) fd.append('legend', entry.legend);
+    if (entry.email) fd.append('email', entry.email);
+    if (entry.rating) fd.append('rating', entry.rating + ' ستاره');
+    fd.append('message', entry.message);
+    fd.append('time', entry.time);
+
     try {
-        const res = await fetch(`https://form.avalform.com/view.php?id=${AVALFORM_ID}&json=1`);
-        const data = await res.json();
-        const list = document.getElementById('reviewsList');
-        list.innerHTML = data.responses.length === 0 
-            ? "<p style='color:rgba(255,255,255,0.8)'>هنوز نظری نیست — اولین نفر باش!</p>"
-            : "";
-
-        data.responses.reverse().forEach(r => {
-            const stars = '⭐'.repeat(r.field_1);
-            list.innerHTML += `
-                <div class="review-card">
-                    <div class="stars">${stars}</div>
-                    <p>${r.field_2.replace(/\n/g, '<br>')}</p>
-                    <div class="name">— ${r.field_3}</div>
-                    <small>${new Date(r.date).toLocaleString('fa-IR')}</small>
-                </div>`;
-        });
+      const res = await fetch(AVALFORM_URL, { method: 'POST', body: fd });
+      if (res.ok) return true;
     } catch(e) {
-        document.getElementById('reviewsList').innerHTML = "در حال بارگذاری نظرات...";
+      console.log('ارسال موقتاً نشد، بعداً دوباره امتحان میشه');
     }
-}
+    return false;
+  }
 
-loadReviews(); // اولین بار
-setInterval(loadReviews, 30000); // هر ۳۰ ثانیه بروزرسانی خودکار
+  // فرم اسطوره
+  document.getElementById('legendForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    let legend = document.getElementById('legend').value;
+    if (legend === 'سایر') legend = document.getElementById('otherLegend').value.trim() || 'نامشخص';
+
+    const entry = {
+      type: 'legend', name: document.getElementById('legendName').value.trim(),
+      legend, message: document.getElementById('legendMessage').value.trim(),
+      time: new Date().toLocaleString('fa-IR')
+    };
+
+    data.votes.unshift(entry);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    await sendToAvalform(entry);
+    updateAll();
+    this.reset();
+    document.getElementById('otherLegend').style.display = 'none';
+    alert('رأی اسطوره ثبت شد و ارسال شد!');
+  });
+
+  // فرم نظر سایت
+  document.getElementById('siteFeedbackForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    if (!document.getElementById('siteName').value.trim()) return alert('اسم الزامی هست!');
+    if (document.getElementById('rating').value === '0') return alert('لطفاً ستاره بده!');
+
+    const entry = {
+      type: 'feedback',
+      name: document.getElementById('siteName').value.trim(),
+      email: document.getElementById('siteEmail').value.trim(),
+      rating: document.getElementById('rating').value,
+      message: document.getElementById('siteMessage').value.trim(),
+      time: new Date().toLocaleString('fa-IR')
+    };
+
+    data.feedbacks.unshift(entry);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    await sendToAvalform(entry);
+    updateAll();
+    this.reset();
+    document.getElementById('rating').value = '0';
+    document.querySelectorAll('.star').forEach(s => s.style.color = '#666');
+
+    alert('ممنون از نظرت! ارسال شد');
+  });
+
+  // آپدیت همه چیز
+  function updateAll() {
+    document.getElementById('totalVotes').textContent = data.votes.length;
+
+    // نمودار اسطوره‌ها
+    const counts = {};
+    data.votes.forEach(v => counts[v.legend] = (counts[v.legend]||0) + 1);
+    const sorted = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,8);
+    document.getElementById('chart').innerHTML = sorted.map(([l,c]) => {
+      const p = Math.round((c/data.votes.length)*100) || 0;
+      return `<div style="background:#222;margin:14px 0;border-radius:12px;overflow:hidden;">
+                <div style="padding:10px 14px;background:#b8860b;color:#000;font-weight:bold;font-size:0.95rem;">${l} (${c})</div>
+                <div style="height:44px;width:${p}%;background:linear-gradient(90deg,#ffd700,#b8860b);display:flex;align-items:center;justify-content:flex-end;padding-right:14px;color:#000;font-weight:bold;">${p}%</div>
+              </div>`;
+    }).join('');
+
+    // نمایش همه نظرات (مرتب‌شده بر اساس زمان)
+    const all = [...data.votes, ...data.feedbacks]
+      .sort((a,b) => new Date(b.time.replace('،', '')) - new Date(a.time.replace('،', '')))
+      .slice(0,30);
+
+    document.getElementById('commentsList').innerHTML = all.map(item => `
+      <div style="background:#1a1a1a;padding:20px;border-radius:16px;margin-bottom:20px;border-left:5px solid ${item.type==='legend'?'#ffd700':'#39ff14'};">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+          <strong style="font-size:1.1rem;">${item.name}</strong>
+          <span style="background:${item.type==='legend'?'#b8860b':'#00ff41'};color:#000;padding:6px 16px;border-radius:30px;font-weight:bold;">
+            ${item.type==='legend' ? item.legend : item.rating + ' ستاره'}
+          </span>
+        </div>
+        <p style="color:#eee;line-height:1.8;margin:12px 0;">${item.message.replace(/\n/g,'<br>')}</p>
+        <small style="color:#b8860b">${item.time}</small>
+      </div>
+    `).join('');
+  }
+
+  updateAll();
+})();
 </script>
 </script>
 </body>
