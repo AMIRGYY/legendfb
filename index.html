@@ -1138,212 +1138,103 @@ img.player-img {
     </div>
 </div>
 <!-- ================== پایان بخش کارت‌های طلایی ================== -->
-<!-- خفن‌ترین نظرسنجی ۲۰۲۵ — 100٪ کار می‌کنه و میره به Avalform تو -->
-<div class="epic-review">
+<!-- فرم نظرسنجی جذاب — اطلاعات مخفیانه می‌ره توی Avalform تو -->
+<div class="review-section">
     <h2>نظرت درباره سایت چیه؟</h2>
-    <p class="lead">۱۰ ثانیه وقت بذار، بهترین هدیه‌ست</p>
+    <p>با یه لحظه وقت گذاشتن خیلی کمکم می‌کنی</p>
 
-    <form id="epicForm">
-        <!-- ستاره‌های جادویی و براق -->
-        <div class="epic-stars" id="epicStars">
-            <input type="radio" name="rating" value="5" id="e5" required>
-            <label for="e5">★★★★★</label>
-
-            <input type="radio" name="rating" value="4" id="e4">
-            <label for="e4">★★★★☆</label>
-
-            <input type="radio" name="rating" value="3" id="e3">
-            <label for="e3">★★★☆☆</label>
-
-            <input type="radio" name="rating" value="2" id="e2">
-            <label for="e2">★★☆☆☆</label>
-
-            <input type="radio" name="rating" value="1" id="e1">
-            <label for="e1">★☆☆☆☆</label>
+    <form id="hiddenForm">
+        <div class="stars-input">
+            <input type="radio" name="rating" value="5" id="star5" required><label for="star5">عالی</label>
+            <input type="radio" name="rating" value="4" id="star4"><label for="star4">خوب</label>
+            <input type="radio" name="rating" value="3" id="star3"><label for="star3">متوسط</label>
+            <input type="radio" name="rating" value="2" id="star2"><label for="star2">ضعیف</label>
+            <input type="radio" name="rating" value="1" id="star1"><label for="star1">بد</label>
         </div>
 
-        <textarea name="message" placeholder="اینجا هر چی دلت خواست بنویس..." required></textarea>
-        <input type="text" name="name" placeholder="اسم (اختیاری — ولی خیلی باحاله بنویسی)" class="name-box">
+        <textarea name="message" placeholder="نظر و پیشنهادت رو بنویس..." required></textarea>
+        <input type="text" name="name" placeholder="اسم (اختیاری)" class="name-input">
 
-        <button type="submit" class="epic-btn">
-            <span>ارسال نظر</span>
-            <div class="fire">✨</div>
-        </button>
+        <button type="submit">ارسال نظر</button>
     </form>
 
-    <div id="epicReviews"></div>
+    <div id="reviewsList">در حال بارگذاری نظرات...</div>
 </div>
 
 <style>
-.epic-review {
-    max-width: 740px;
-    margin: 80px auto;
-    background: linear-gradient(135deg, #0f0f23, #1a1a3e, #2d1b69);
-    padding: 60px 40px;
-    border-radius: 36px;
-    color: #fff;
-    box-shadow: 0 30px 80px rgba(45,27,105,0.6);
-    position: relative;
-    overflow: hidden;
-    font-family: Tahoma, sans-serif;
-    text-align: center;
-}
-.epic-review::before {
-    content: '';
-    position: absolute;
-    inset: -50%;
-    background: conic-gradient(from 0deg, transparent, #ff6b6b 10%, transparent 20%);
-    animation: spin 15s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-
-.epic-review h2 {
-    font-size: 36px;
-    margin: 0 0 12px;
-    background: linear-gradient(90deg, #fff, #c084fc);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-.lead { font-size: 19px; opacity: 0.9; margin-bottom: 40px; }
-
-.epic-stars { margin: 40px 0; }
-.epic-stars input { display: none; }
-.epic-stars label {
-    font-size: 68px;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    filter: brightness(0.5);
-}
-.epic-stars label:hover { filter: brightness(1) drop-shadow(0 0 30px #ffd700); transform: scale(1.25) rotate(10deg); }
-.epic-stars input:checked + label {
-    filter: brightness(1) drop-shadow(0 0 40px #ffd700);
-    animation: boom 0.8s ease-out;
-}
-@keyframes boom {
-    0%   { transform: scale(1); }
-    50%  { transform: scale(1.5); }
-    100% { transform: scale(1.15); }
-}
-
-textarea, .name-box {
-    width: 100%;
-    padding: 20px;
-    border: none;
-    border-radius: 24px;
-    margin: 18px 0;
-    font-size: 18px;
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(10px);
-    color: white;
-    transition: 0.3s;
-}
-textarea:focus, .name-box:focus {
-    outline: none;
-    background: rgba(255,255,255,0.2);
-    box-shadow: 0 0 0 4px rgba(255,255,255,0.2);
-}
-
-.epic-btn {
-    position: relative;
-    background: linear-gradient(45deg, #ffd700, #ff6b6b);
-    color: #000;
-    font-weight: bold;
-    font-size: 20px;
-    padding: 18px 70px;
-    border: none;
-    border-radius: 60px;
-    cursor: pointer;
-    overflow: hidden;
-    box-shadow: 0 15px 40px rgba(255,107,107,0.5);
-}
-.epic-btn:hover { transform: translateY(-8px); }
-.fire { position: absolute; inset: 0; font-size: 40px; opacity: 0; pointer-events: none; }
-.epic-btn:active .fire { animation: fire 1s; opacity: 1; }
-@keyframes fire { 0% { transform: scale(0); } 50% { transform: scale(2); } 100% { transform: scale(0); } }
-
-#epicReviews { margin-top: 60px; }
-.epic-card {
-    background: rgba(255,255,255,0.95);
-    backdrop-filter: blur(10px);
-    color: #222;
-    padding: 30px;
-    border-radius: 28px;
-    margin: 25px 0;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-    animation: rise 0.8s ease-out forwards;
-    opacity: 0;
-}
-.epic-card:nth-child(1) { animation-delay: 0.1s; }
-.epic-card:nth-child(2) { animation-delay: 0.2s; }
-.epic-card .stars { 
-    font-size: 36px; 
-    background: linear-gradient(45deg, #ffd700, #ff6b6b);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-@keyframes rise { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+.review-section{max-width:700px;margin:50px auto;background:linear-gradient(135deg,#667eea,#764ba2);padding:40px;border-radius:24px;color:white;box-shadow:0 20px 40px rgba(0,0,0,.2);font-family:Tahoma,sans-serif;text-align:center}
+.review-section h2{font-size:28px;margin:0 0 10px}
+.review-section p{opacity:0.9;margin-bottom:30px}
+.stars-input{margin:25px 0}
+.stars-input input{display:none}
+.stars-input label{font-size:40px;cursor:pointer;padding:0 8px;transition:.3s}
+.stars-input label:before{content:'☆'}
+.stars-input input:checked~label:before,.stars-input label:hover:before,.stars-input label:hover~label:before{content:'⭐';color:#ffd700;text-shadow:0 0 15px #fff}
+textarea,.name-input{width:100%;padding:16px;border:none;border-radius:16px;margin:15px 0;font-size:16px}
+textarea{height:110px;resize:none}
+button{background:#fff;color:#667eea;font-weight:bold;padding:14px 40px;border:none;border-radius:50px;cursor:pointer;font-size:18px;transition:.3s}
+button:hover{transform:translateY(-3px);box-shadow:0 15px 30px rgba(0,0,0,.3)}
+.review-card{background:white;color:#333;margin:20px 0;padding:20px;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,.15);animation:slideUp .6s}
+.review-card .stars{color:#ffd700;font-size:24px;margin-bottom:10px}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 </style>
 
 <script>
-// 100٪ میره به فرم Avalform تو → id=75348947
-const AVAL_ID = "75348947;
+// ارسال مخفی به Avalform + نمایش نظرات زنده
+const AVALFORM_ID = "75348947";
+const AVALFORM_URL = `https://form.avalform.com/submit.php?id=${AVALFORM_ID}`;
 
-document.getElementById('epicForm').addEventListener('submit', async function(e) {
+document.getElementById('hiddenForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const rating = document.querySelector('input[name="rating"]:checked')?.value;
-    if (!rating) return alert('ستاره بده لطفاً!');
+    const rating = this.rating.value;
+    const message = this.message.value;
+    const name = this.name.value.trim() || "ناشناس";
 
-    const message = this.message.value.trim();
-    const name = this.name.value.trim() || 'ناشناس';
+    // ارسال مخفی به Avalform
+    const formData = new FormData();
+    formData.append('field_1', rating);      // امتیاز
+    formData.append('field_2', message);     // نظر
+    formData.append('field_3', name);        // اسم
 
-    const fd = new FormData();
-    fd.append('field_1', rating);
-    fd.append('field_2', message);
-    fd.append('field_3', name);
-
-    // ارسال مخفی به Avalform تو
-    await fetch(`https://form.avalform.com/submit.php?id=${AVAL_ID}`, {
+    await fetch(AVALFORM_URL, {
         method: 'POST',
-        body: fd
+        body: formData
     });
 
-    alert('ممنون داداش! نظرت ثبت شد');
+    alert('ممنون! نظرت ثبت شد و همه می‌تونن ببیننش');
     this.reset();
-    document.querySelectorAll('input[name="rating"]').forEach(r => r.checked = false);
-    load();
+    loadReviews(); // بروزرسانی فوری نظرات
 });
 
-// نمایش زنده نظرات از Avalform تو
-async function load() {
+// لود کردن نظرات زنده از Avalform
+async function loadReviews() {
     try {
-        const r = await fetch(`https://form.avalform.com/view.php?id=${AVAL_ID}&json=1&t=${Date.now()}`);
-        const d = await r.json();
-        const box = document.getElementById('epicReviews');
-        box.innerHTML = '';
+        const res = await fetch(`https://form.avalform.com/view.php?id=${AVALFORM_ID}&json=1`);
+        const data = await res.json();
+        const list = document.getElementById('reviewsList');
+        list.innerHTML = data.responses.length === 0 
+            ? "<p style='color:rgba(255,255,255,0.8)'>هنوز نظری نیست — اولین نفر باش!</p>"
+            : "";
 
-        if (!d.responses || d.responses.length === 0) {
-            box.innerHTML = '<p style="color:#fff8;font-size:19px">اولین نفر باش که نظر میده!</p>';
-            return;
-        }
-
-        d.responses.reverse().forEach(x => {
-            const stars = '★★★★★'.substring(0, x.field_1) + '☆☆☆☆☆'.substring(x.field_1);
-            box.innerHTML += `
-                <div class="epic-card">
+        data.responses.reverse().forEach(r => {
+            const stars = '⭐'.repeat(r.field_1);
+            list.innerHTML += `
+                <div class="review-card">
                     <div class="stars">${stars}</div>
-                    <p style="margin:15px 0;line-height:1.7">${x.field_2.replace(/\n/g,'<br>')}</p>
-                    <strong style="color:#5b21b6">— ${x.field_3}</strong><br>
-                    <small style="color:#777">${new Date(x.date).toLocaleString('fa-IR')}</small>
+                    <p>${r.field_2.replace(/\n/g, '<br>')}</p>
+                    <div class="name">— ${r.field_3}</div>
+                    <small>${new Date(r.date).toLocaleString('fa-IR')}</small>
                 </div>`;
         });
-    } catch(e) {}
+    } catch(e) {
+        document.getElementById('reviewsList').innerHTML = "در حال بارگذاری نظرات...";
+    }
 }
 
-load();
-setInterval(load, 22000);
+loadReviews(); // اولین بار
+setInterval(loadReviews, 30000); // هر ۳۰ ثانیه بروزرسانی خودکار
+</script>
 </script>
 </body>
 </html>
